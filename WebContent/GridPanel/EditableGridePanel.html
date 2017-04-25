@@ -1,0 +1,157 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript" src="datastores.js"></script>
+<script type="text/javascript">
+
+	Ext.onReady(function(){
+		//创建网格可编辑实例
+        var rowEditing = Ext.create('Ext.grid.plugin.RowEditing', {
+            clicksToEdit : 2,	//双击两次进入编辑
+            autoCancel   : false
+        });
+        var textField = {	//创建一个单行文本框实例
+            xtype : 'textfield'
+        };
+		//创建用于修改数据记录组合编辑框
+        var stateEditor = {
+            xtype         : 'combo',
+            triggerAction : 'all',
+            displayField  : 'state',
+            valueField    : 'state',
+            store         : stateStore
+        };
+		//创建带编辑器的列
+        var columns = [
+                       {
+                           header    : 'Last Name',
+                           dataIndex : 'lastName',
+                           sortable  : true,
+                           editor    : textField	//给每一列指定编辑器
+                       },
+                       {
+                           header    : 'First Name',
+                           dataIndex : 'firstName',
+                           sortable  : true,
+                           editor    : textField
+                       },
+                       {
+                           header    : 'Street Address',
+                           dataIndex : 'street',
+                           flex      : 1,
+                           sortable  : true,
+                           editor    : textField
+                       },
+                       {
+                           header    : 'City',
+                           dataIndex : 'city',
+                           sortable  : true,
+                           editor    : textField
+                       },
+                       {
+                           header    : 'State',
+                           dataIndex : 'state',
+                           sortable  : true,
+                           width     : 50,
+                           editor    : stateEditor
+                       },
+                       {
+                           header    : 'Zip Code',
+                           dataIndex : 'zip',
+                           sortable  : true,
+                           editor    : textField
+                       }
+                   ];
+		//创建分页工具条
+        var pagingToolbar = {
+                xtype       : 'pagingtoolbar',
+                store       : employeeStore,
+                displayInfo : true
+            };
+
+             var onDelete = function() {
+                var selected = grid.selModel.getSelection();
+                Ext.MessageBox.confirm(
+                        'Confirm delete',
+                        'Are you sure?',
+                        function(btn) {
+                            if (btn == 'yes') {
+                                grid.store.remove(selected);
+                                grid.store.sync();
+                            }
+                        }
+                );
+            };
+
+            var onInsertRecord = function() {
+                var selected = grid.selModel.getSelection();
+                console.log("selected index:%o", selected[0].index);
+                rowEditing.cancelEdit();
+                var newEmployee = Ext.create("Employee");
+                employeeStore.insert(selected[0].index, newEmployee);
+                rowEditing.startEdit(selected[0].index, 0);
+            };
+
+            var doRowCtxMenu = function(view, record, item, index, e) {
+                e.stopEvent();
+                if (!grid.rowCtxMenu) {
+                    grid.rowCtxMenu = new Ext.menu.Menu({
+                        items : [
+                            {
+                                text    : 'Insert Record',
+                                handler : onInsertRecord
+                            },
+                            {
+                                text    : 'Delete Record',
+                                handler : onDelete
+                            }
+                        ]
+                    });
+                }
+                grid.selModel.select(record);
+                grid.rowCtxMenu.showAt(e.getXY());
+            };
+
+			//创建网格面板实例
+            var grid = Ext.create('Ext.grid.Panel', {
+                columns    : columns,
+                store      : employeeStore,
+                loadMask   : true,
+                bbar       : pagingToolbar,	//dockedItems : [pagingToolbar],
+                plugins    : [ rowEditing ],
+                stripeRows : true,
+                selType    : 'rowmodel',
+                viewConfig : {
+                    forceFit : true
+                },
+                listeners  : {
+                    itemcontextmenu : doRowCtxMenu,
+                    destroy         : function(thisGrid) {
+                        if (thisGrid.rowCtxMenu) {
+                            thisGrid.rowCtxMenu.destroy();
+                        }
+                    }
+                }
+            });
+			//创建网格面板的容器，但window窗口容器实例实例化
+            Ext.create('Ext.Window', {
+                height : 350,
+                width  : 600,
+                border : false,
+                layout : 'fit',
+                items  : grid
+            }).show();
+
+            employeeStore.load();//访问服务器获取数据
+
+	});
+</script>
+</head>
+<body>
+</body>
+
+</html>

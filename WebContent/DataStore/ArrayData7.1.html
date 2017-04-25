@@ -1,0 +1,61 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+//创建本地数组数据
+var arrayData = [
+                 ['Tom','T'],
+                 ['Mike','M'],
+                 ['Jerry','J'],
+                 ['Allen','A']
+                 ];
+//创建用户模型
+Ext.define('User',{
+	extend	:	'Ext.data.Model',
+	fields	:	[	//配置数组映射
+	      	 	 {
+	      	 		 name	:	'name',
+	      	 		 mapping	:	1
+	      	 	 },
+	      	 	 {
+	      	 		 name	:	'code',
+	      	 		 mapping	:	2
+	      	 	 }
+	      	 	 ]
+});
+//创建数据存储
+var store = Ext.create('Ext.data.Store',{
+	model	:	'User',
+	proxy	:	{
+		type	:	'memory',	//memory代理创建一个data Store实例
+		reader	:	{
+			model	:	'User',
+			type	:	'array'
+		}
+	}
+});
+//store.loadData(arrayData);
+//console.log(store.first().data);
+	Ext.onReady(function(){
+		//添加一个ArrayReader实例，代理获取数据，创建用户模型
+		//store.loadData(arrayData);
+		//console.log(store.first().data);
+		var store = Ext.create('Ext.data.ArrayStore',{
+			data	:	arrayData,
+			fields	:	['personName','code']
+		});
+
+		console.log(store.data.items[1].data);
+		console.log(store.first().data);
+
+	});
+</script>
+</head>
+<body>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+
+var myWin = Ext.create('Ext.Window',({
+			height	:	200,
+			width	:	400,
+			autoScroll	:	true,
+			id	:	'myWin',
+			title	:	'A Window with a Colmun layout',
+			layout :	'column',
+			defaults	:	{
+				frame	:	true
+			},
+			items	:	[//// 参数 width 与 columnWidth 混用 -- 所有columnWidth值之和必须为1.
+			     	 	 {
+			     	 		 title	:	'Col 1',
+			     	 		 id	:	'col1',
+			     	 		 columnWidth	: 0.3
+
+			     	 	 },
+			     	 	 {
+			     	 		 title	:	'Col 2',
+			     	 		 html	:	'20% relative width',
+			     	 		 columnWidth	: 0.2
+			     	 	 },
+			      	 	 {
+			     	 		 title	:	'Col 3',
+			     	 		 html	:	'100px fixed width',
+			     	 		 width	:	100
+			     	 	 },
+			     	 	 {
+			     	 		 title	: 'Col 4',
+			     	 		// frame : true,
+			     	 		 html : '50% relative width',
+			     	 		 columnWidth	: 0.5
+			     	 	 }
+			     	 	 ]
+		}));
+
+	Ext.onReady(function(){
+		//向子组件添加组件
+ 		 Ext.getCmp('col1').add({height:250,title:'New Panel',frame	:	true});
+		myWin.show();
+
+
+	});
+</script>
+</head>
+<body>
+</body>
+
+</html>

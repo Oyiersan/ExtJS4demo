@@ -1,0 +1,43 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+var htmlEditor = {
+		xtype	:	'htmleditor',
+		fieldLabel	:	'enter in any text',
+		allowBlank	:	false,
+		validate	:	function()	{
+			var val	= this.getValue();
+			return	(this.allowBlank || val.length>1);
+		},
+		anchor	:	'100% 100%'
+
+}
+	Ext.onReady(function(){
+		var fp = Ext.create('Ext.form.Panel',{
+			renderTo : Ext.getBody(),
+			width	: 400,
+			height	:	240,
+			title	:	'Exercising textfilds',
+			frame	:	true,
+			bodyStyle	:	'padding : 6px',
+			labelWidth	:	126,
+			defaultType	:	'textfield',
+			defaults	:	{
+				mgTarget	:	'side',
+				anchor		:	'-20'
+					},
+			items	: htmlEditor
+		});
+
+	});
+</script>
+</head>
+<body>
+</body>
+
+</html>

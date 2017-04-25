@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+var myWin = Ext.create('Ext.Window',{
+	layout	:	'hbox',
+	height	:	300,
+	width	: 300,
+	title	:	'a Container with an HBox layout',
+	//配置布局参数，pack垂直对齐分布,align水平对齐，
+	//pack可配置三个参数start，center,end
+	//align可配置三个参数top,middle,stretch,stretchmax
+	layoutConfig	:	{
+		pack : 'end'	//?????????????????????????????//
+	},
+	defaults	:	{
+
+		frame	:	true,
+		width	:	75
+	},
+	items	:	[
+	     	 	 {
+	     	 		 title	:	'Panel1',
+	     	 		 height	:	100,
+	     	 		 flex	:	1			//flex设置子组件所占容器的权重
+	     	 	 },
+	     	 	 {
+	     	 		 title	:	'Panel2',
+	     	 		 height	:	75,
+	     	 		 widght	:	100,
+	     	 		flex	:	1
+	     	 	 },
+	     	 	 {
+	     	 		 title	:	'Panel3',
+	     	 		 height	:200,
+	     	 		flex	:	2
+	     	 	 }
+	     	 	 ]
+});
+	Ext.onReady(function(){
+		myWin.show();
+	});
+</script>
+</head>
+<body>
+</body>
+
+</html>

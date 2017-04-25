@@ -1,0 +1,53 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+	Ext.onReady(function(){
+		 Ext.onReady(function() {
+			 //创建数组数据
+		        var arrayData = [
+		            ['Jay Garcia',    'MD'],
+		            ['Aaron Baker',   'VA'],
+		            ['Susan Smith',   'DC'],
+		            ['Mary Stein',    'DE'],
+		            ['Bryan Shanley', 'NJ'],
+		            ['Nyri Selgado',  'CA']
+		        ];
+		        var store = Ext.create('Ext.data.ArrayStore', {
+		            data   : arrayData,
+		            fields : ['fullName', 'state']	//创建字段关联数据
+		        });
+
+		        var grid = Ext.create('Ext.grid.Panel', {
+		            title        : 'Our first grid',
+		            renderTo     : Ext.getBody(),
+		            autoHeight   : true,
+		            width        : 250,
+		            store        : store,
+		            selType      : 'rowmodel',
+		            singleSelect : true,
+		            //multiSelect	 :	true,
+		            columns      : [
+		                {
+		                    header    : 'Full Name',
+		                   	sortable  : false,
+		                    dataIndex : 'fullName'
+		                },
+		                {
+		                    header    : 'State',	//默认是可排序的
+		                    dataIndex : 'state'
+		                }
+		            ]
+		        });
+		    });
+	});
+</script>
+</head>
+<body>
+</body>
+
+</html>

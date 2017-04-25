@@ -1,0 +1,67 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+
+	var myCheckboxGroup = new Ext.form.CheckboxGroup({
+	    columns: 3,
+	    items: [{
+	        name: 'cb1',
+	        boxLabel: 'Single 1'
+	    }, {
+	        name: 'cb2',
+	        boxLabel: 'Single 2'
+	    }, {
+	        name: 'cb3',
+	        boxLabel: 'Single 3'
+	    }, {
+	        name: 'cbGroup',
+	        boxLabel: 'Grouped 1',
+	        inputValue: 'value1'
+	    }, {
+	        name: 'cbGroup',
+	        boxLabel: 'Grouped 2',
+	        inputValue: 'value2'
+	    }, {
+	        name: 'cbGroup',
+	        boxLabel: 'Grouped 3',
+	        inputValue: 'value3'
+	    }]
+	});
+
+	Ext.onReady(function() {
+		//复选框 设置默认的选择按钮
+		myCheckboxGroup.setValue({
+		    cb1: true,
+		    cb3: false,
+		    cbGroup: ['value1', 'value3']
+		});
+
+		var fp = Ext.create('Ext.form.Panel',{
+			renderTo : Ext.getBody(),
+			width	: 400,
+			height	:	240,
+			title	:	'Exercising textfilds',
+			frame	:	true,
+			bodyStyle	:	'padding : 6px',
+			labelWidth	:	126,
+			defaultType	:	'textfield',
+			defaults	:	{
+				mgTarget	:	'side',
+				anchor		:	'-20'
+					},
+			items	: myCheckboxGroup
+		});
+	});
+
+
+</script>
+</head>
+<body>
+</body>
+
+</html>

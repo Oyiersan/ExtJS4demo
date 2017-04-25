@@ -1,0 +1,86 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript" src="datastores.js"></script>
+<script type="text/javascript">
+var grid;
+Ext.onReady(function() {
+	//创建列
+    var columns = [
+        {
+            xtype     : 'templatecolumn',
+            header    : 'ID',
+            dataIndex : 'id',
+            sortable  : true,
+            width     : 50,
+            resizable : false,
+            hidden    : true,	//开始设置为隐藏
+            tpl       : '<span style="color: #0000FF;">{id}</span>'
+        },
+        {
+            header    : 'Last Name',
+            dataIndex : 'lastName',
+            sortable  : true,
+            hideable  : false,	//设置为false则用户无法隐藏该列
+            width     : 100
+        },
+        {
+            header    : 'First Name',
+            dataIndex : 'firstName',
+            sortable  : true,
+            //hideable  : false,//
+            width     : false
+        },
+        {
+            header    : 'Address',
+            dataIndex : 'street',
+            sortable  : false,
+            flex      : 1,
+            tpl       : '{street}<br/>{city} {state}, {zip}'//address基于字段city,state,zip等字段来组合渲染
+        }
+    ];
+
+	//配置分页工具在面板底部
+    var pagingToolbar = {
+        xtype       : 'pagingtoolbar',
+        store       : employeeStore,
+        dock        : 'bottom',
+        displayInfo : true
+    };
+	//创建网格面板
+    var grid = Ext.create('Ext.grid.Panel', {
+        columns      : columns,
+        store        : employeeStore,
+        loadMask     : true,//加载遮罩false不显示加载遮罩视图。使用另一个元素创建并包装当前元素,绑定事件
+        selType      : 'rowmodel',
+        singleSelect : true,
+        stripeRows   : true,
+        viewConfig   : {
+            forceFit : true
+        },
+        dockedItems : [
+            pagingToolbar
+        ]
+    });
+
+    employeeStore.load();
+
+    Ext.create('Ext.window.Window', {
+        height : 350,
+        width  : 550,
+        border : false,
+        items  : grid,
+        center : true,
+        layout : 'fit'
+    }).show();
+});
+</script>
+</head>
+<body>
+</body>
+
+</html>

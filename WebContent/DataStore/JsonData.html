@@ -1,0 +1,56 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+var	deptStore = Ext.create('Ext.data.Store',{
+	//设置字段，映射
+	fields	:	[
+	      	 	 'name',
+	      	 	 'age',
+	      	 	 {
+	      	 		 name :	'id',
+	      	 		 type : 'int'
+	      	 	 }
+	      	 	 ],
+	      	 	 proxy	:	{
+	      	 		 type	:	'ajax',//选择ajax代理
+	      	 		 url	:	'data.json',	//连接服务器URL
+	      	 		 reader	:	{	//配置jsonReader
+	      	 			 type	:	'json',
+	      	 			 root	:	'data',
+	      	 			 idProperty	:	'id',	//包含一条记录主键值的行对象内的属性名称
+	      	 			 successProperty	:	'meta.success'	//检索'success'标识的属性名称，一般为布尔值，一种异常处理机制
+	      	 		 }
+	      	 	 }
+});
+
+
+deptStore.load({
+	//scope: this,//callback函数的作用域
+	//操作完成时执行的函数。记录数据,操作本身,操作成功完成时为true
+
+	callback :	function(records, operation, success)	{
+		console.log(records);
+		console.log(operation);
+		if(success)	{
+			console.log('dept name:'+records[1].get('name'));
+		} else	{
+			console.log('the server report an error');
+		}
+	}
+});
+
+	Ext.onReady(function(){
+
+
+	});
+</script>
+</head>
+<body>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript" src="datastores.js"></script>
+<script type="text/javascript">
+var grid;
+Ext.onReady(function() {
+    var columns = [
+        {
+            xtype     : 'templatecolumn',
+            header    : 'ID',
+            dataIndex : 'id',
+            sortable  : true,
+            width     : 50,
+            resizable : false,
+            hidden    : true,
+            tpl       : '<span style="color: #0000FF;">{id}</span>'
+        },
+        {
+            header    : 'Last Name',
+            dataIndex : 'lastName',
+            sortable  : true,
+            hideable  : false,
+            width     : 75
+        },
+        {
+            header    : 'First Name',
+            dataIndex : 'firstName',
+            sortable  : true,
+            hideable  : false,
+            width     : 75
+        },
+        {
+            header    : 'Address',
+            dataIndex : 'street',
+            sortable  : false,
+            flex      : 1,
+            tpl       : '{street}<br />{city} {state}, {zip}'
+        }
+    ];
+
+    //为网格创建事件处理
+    //指示网格面板生成事件的工具类
+    var doMsgBoxAlert = function() {
+        var record = grid.getSelectionModel().getSelection()[0];//获取鼠标选中,鼠标只选中一个行列
+        console.log(record);
+        var firstName = record.get('firstName');
+        var lastName = record.get('lastName');
+        var msg = Ext.String.format('The record you chose:<br /> {0}, {1}',lastName, firstName);
+        Ext.MessageBox.alert('', msg);
+    };
+	/////////////////////
+/*     var doRowDblClick = function() {	//执行事件方法
+        doMsgBoxAlert();
+    }; */
+	//网格视图引用，数据存储的记录，元素，索引，EvenObjecct实例(所有产生的事件)
+    var doRowCtxMenu = function(view, record, item, index, e) {
+       e.stopEvent();//阻止浏览器执行与事件关联的默认动作，preventDefault() 和 stopPropagation()
+       console.log(view);
+         if (!view.rowCtxMenu) {
+            view.rowCtxMenu = Ext.create('Ext.menu.Menu', {	//创建菜单
+                items : [
+                    {
+                        text    : 'Show Record',
+                        handler : doMsgBoxAlert
+                    }
+                ]
+            });
+        }
+        view.rowCtxMenu.showAt(e.getXY());	//鼠标的坐标，获得行
+    };
+
+    var pagingToolbar = {
+        xtype       : 'pagingtoolbar',
+        store       : employeeStore,
+        dock        : 'bottom',
+        displayInfo : true
+    };
+
+    var grid = Ext.create('Ext.grid.Panel', {
+        columns      : columns,
+        store        : employeeStore,
+        loadMask     : true,
+        selType      : 'rowmodel',//单行选择
+        singleSelect : true,
+        stripeRows   : true,
+        viewConfig   : {
+            forceFit : true
+        },
+        dockedItems : [pagingToolbar],
+        listeners    : {	//面板配置事件的监听
+            itemcontextmenu : doRowCtxMenu,
+            itemdblclick    : doMsgBoxAlert,
+			//清除组件，
+              destroy         : function(view) {
+            	  console.log(view.rowCtxMenu);
+                if (view.rowCtxMenu) {	//销毁之前创建的组件，删除多余DOM节点
+                	console.log('destroy');
+                    view.rowCtxMenu.destroy();
+                }
+            }
+        }
+    });
+
+    employeeStore.load();
+
+    Ext.create('Ext.window.Window', {
+        height : 350,
+        width  : 550,
+        border : false,
+        items  : grid,
+        center : true,
+        layout : 'fit'
+    }).show();
+});
+
+</script>
+</head>
+<body>
+</body>
+
+</html>

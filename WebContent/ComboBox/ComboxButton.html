@@ -1,0 +1,72 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+	Ext.onReady(function(){
+        Ext.QuickTips.init();
+
+        var radios = [
+            {
+                xtype      : 'radio',
+                fieldLabel : "Which do you own",
+                boxLabel   : 'Cat',
+                name       : 'pet',
+                inputValue : 'cat'
+            },
+            {
+                xtype          : 'radio',
+                fieldLabel     : " ",
+                labelSeparator : ' ',
+                boxLabel       : 'Dog',
+                name           : 'pet',
+                inputValue     : 'dog'
+            },
+            {
+                xtype          : 'radio',
+                fieldLabel     : " ",
+                labelSeparator : ' ',
+                boxLabel       : 'Fish',
+                name           : 'pet',
+                inputValue     : 'fish'
+            },
+            {
+                xtype          : 'radio',
+                fieldLabel     : " ",
+                labelSeparator : ' ',
+                boxLabel       : 'Bird',
+                name           : 'pet',
+                inputValue     : 'bird'
+            }
+        ]
+
+        var fp = {
+            xtype      : 'form',
+            defaults : {
+              labelWidth : 110
+            },
+            items      : radios,
+            frame      : true
+        }
+
+        new Ext.Window({
+            title   : '',
+            layout  : 'fit',
+            height  : 140,
+            width   : 200,
+            borde   : false,
+            items   : fp
+        }).show();
+
+
+
+	});
+</script>
+</head>
+<body>
+</body>
+
+</html>

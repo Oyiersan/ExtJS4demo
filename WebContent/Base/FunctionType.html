@@ -1,0 +1,55 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+	Ext.onReady(function(){
+//Function 函数
+//前两种创建函数的主要区别:function语句形式 ,javascript解释器 直接回去找 , 其他的代码就从上到下顺序执行
+		//fun1();
+		//alert(fun2);
+		//fun2();
+		//1: function语句形式
+		//function fun1(){
+		//	alert('fun1...');
+		//};
+		////2: 函数直接量的形式
+		//var fun2 = function(){
+		//	alert('fun2...');
+		//};
+
+
+		// arguments对象:每一个函数内部都有一个arguments对象
+		//function test(x,y){
+		//	// 第一个作用:接受函数的实际参数
+		//	alert(arguments.length);		// len = 3
+		//	alert(arguments[2]);			// val = 3
+		//};
+		//test(1,2,3);
+
+		// 第二个作用: 通常用于递归操作
+		// arguments.callee 表示引用当前函数本身
+		function fact(number){
+			if(number <= 1){
+				return 1 ;
+			} else {
+				//number*fact(number-1);
+				return number*arguments.callee(number-1);
+			}
+		};
+		alert(fact(5));
+		//var fact2 = fact ;
+		//fact = null ;
+		//alert(fact2(5));
+
+	});
+
+</script>
+</head>
+<body>
+</body>
+
+</html>

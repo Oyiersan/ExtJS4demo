@@ -1,0 +1,65 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello form</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+//Ext.QuickTips.init();
+var fpItems = [
+               {
+            		fieldLabel : 'Alpha only',
+            		allowBlank : false,
+            		emptyText : 'This field is empty!',
+            		maskRe : /[a-z]/i,
+            		msgTarget : 'side'
+               },
+               {
+            	   fieldLabel : '3到7个字符',
+            		allowBlank : false,
+            		msgTarget : 'under',
+            		minLength : 3,
+            		maxLength : 7
+               },
+               {
+            	   fieldLabel : 'Special Chars Only',
+            	   msgTarget : 'qtip',
+            	   stripCharRe : /[a-zA-Z0-9]/ig,
+               },
+               {
+            	   fieldLabel : 'Web Only with VType',
+            		vtype : 'url',
+            		msgTarget : 'side'
+               }
+               ];
+	Ext.onReady(function() {
+
+		//console.log('getBody');
+		var fp = Ext.create('Ext.form.Panel',{
+			renderTo : Ext.getBody(),
+			width	: 400,
+			height	:	240,
+			title	:	'Exercising textfilds',
+			frame	:	true,
+			bodyStyle	:	'padding : 6px',
+			labelWidth	:	126,
+			defaultType	:	'textfield',
+			defaults	:	{
+				mgTarget	:	'side',
+				anchor		:	'-20'
+					},
+			items	: fpItems
+		});
+		var t = fp.getForm().isValid();
+		console.log(t);
+	});
+</script>
+</head>
+<body>
+</body>
+
+
+
+
+</html>

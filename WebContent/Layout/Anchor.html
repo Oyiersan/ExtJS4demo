@@ -1,0 +1,58 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+//一个组件的实例
+var myWin = Ext.create('Ext.Window',({
+	height	:	300,
+	width	:	300,
+	layout	:	'anchor',
+	border	:	false,
+	anchorSize	:	'400',
+	items	: [
+	     	   //百分比设置相对尺寸
+	     	  /* {
+	     		  title		:	'Panel1',
+	     		  anchor	:	'100%, 25%',
+	     		  frame		:	true	//设置为 'true' 在组件渲染时在组件周围提供一个圆角边框
+	     	  },
+	     	  {
+	     		  title		:	'Panel2',
+	     		  anchor	:	'0, 50%',
+	     		  frame		:	true
+	     	  },
+	     	  {
+	     		  title		:	'Panel3',
+	     		  anchor	:	'50%, 25%',
+	     		 // frame		:	true
+	     	  }, */
+	     	  //设置偏移量，相对于容器的位置，通常设置为负数
+	     	  {
+	     		  title		:	'偏移量1',
+	     		  anchor	:	'-50 -100',
+	     		  frame		:	true,
+	     	  },
+	     	  {
+	     		  title		:	'偏移量2',
+	     		  anchor	:	'-100 -200',
+	     		  frame		: true,
+	     	  }
+	     	  ]
+}));
+
+
+	Ext.onReady(function(){
+		myWin.show();
+		//myWin.show();
+
+	});
+</script>
+</head>
+<body>
+</body>
+
+</html>

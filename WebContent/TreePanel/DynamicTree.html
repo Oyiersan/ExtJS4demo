@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+
+	Ext.require(['Ext.data.*', 'Ext.window.Window', 'Ext.tree.*']);
+
+	var store = Ext.create('Ext.data.TreeStore', {
+		autoSync	:	true,	//发生改变自动同步数据
+	    proxy : {
+	        type : 'jsonp',		//不同域使用jsonp代理，如果使用自己服务器同域使用ajax代理
+	        url  : 'http://extjsinaction.com/treeData.php'
+	    },
+	    root  : {
+	        text     : 'My Company',	//http://extjsinaction.com/treeData.php?_dc=1491623836134&node=mycompany&callback=Ext.data.JsonP.callback1
+	        id       : 'mycompany',		//id作为node的参数
+	        expanded : true
+	    }
+	});
+
+	Ext.onReady(function() {
+	    Ext.createWidget('window', {
+	        title    : 'Our first remote tree',
+	        layout   : 'fit',
+	        autoShow : true,
+	        height   : 360,
+	        width    : 200,
+	        items    : {
+	            xtype       : 'treepanel',
+	            store       : store,
+	            border      : false
+	        }
+	    });
+	});
+
+</script>
+</head>
+<body>
+</body>
+
+</html>

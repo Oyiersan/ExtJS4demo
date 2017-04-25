@@ -1,0 +1,111 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<!-- <script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script> -->
+<script type="text/javascript" src="../ExtJS4.0/bootstrap.js"></script>
+<script type="text/javascript">
+
+var tabs = [
+            {
+            	xtype	:	'fieldcontainer',
+            	title	:	'Phone Number',
+            	layout	:	'form',
+            	bodyStyle	:	'padding:6px 6px 0',	//自定义panel的body元素上的内边距
+            	defaults	:	{
+            		xtype	:	'textfield',
+            		width	:	230
+            	},
+            	items	:	[
+            	     	 	 {
+            	     	 		 fieldLabel	:	'Home',
+            	     	 		 name	:	'home'
+            	     	 	 },
+            	     	 	 {
+            	     	 		 fieldLabel	:	'Business',
+            	     	 		 name	:	'business'
+            	     	 	 },
+            	     	 	 {
+            	     	 		 fieldLabel	:	'Mobile',
+            	     	 		 name	:	'mobile'
+            	     	 	 },
+            	     	 	 {
+            	     	 		 fieldLabel	:	'Fax',
+            	     	 		 name	:	'fax'
+            	     	 	 }
+            	     	 	 ]
+            }];
+
+	Ext.onReady(function(){
+		Ext.create('Ext.form.Panel', {
+		    title: 'FieldContainer 示例',
+		    width: 550,
+		    bodyPadding: 20,
+		    //layout	: 'vbox',
+		    items:
+		    	tabs
+
+/* 		        xtype: 'fieldcontainer',
+		        fieldLabel: '最近三份工作',
+		        labelWidth: 100,
+		        // body 区域将包含三个文本域(text fields),
+		        //水平排列, 通过可拖动的分隔符 splitter 分隔开.
+		        layout: 'form',		//分列布局
+
+		        title	:	'Phone Nu',
+		        bodyStyle	:	'padding:6px 6px 0',
+            	defaults	:	{
+            		xtype	:	'textfield',
+            		width	:	230
+            	},
+            	items	:	[
+            	     	 	 {
+            	     	 		 fieldLabel	:	'Home',
+            	     	 		 name	:	'home'
+            	     	 	 },
+            	     	 	 {
+            	     	 		 fieldLabel	:	'Business',
+            	     	 		 name	:	'business'
+            	     	 	 },
+            	     	 	 {
+            	     	 		 fieldLabel	:	'Mobile',
+            	     	 		 name	:	'mobile'
+            	     	 	 },
+            	     	 	 {
+            	     	 		 fieldLabel	:	'Fax',
+            	     	 		 name	:	'fax'
+            	     	 	 }
+            	     	 	 ] */
+/* 		        items: [
+		         		{
+				            xtype: 'textfield',
+				            flex: 1
+		        		},
+		        		{
+				            xtype: 'splitter'
+		        		},
+		        		{
+				            xtype: 'textfield',
+				            flex: 1
+		      			 },
+		      			 {
+				            xtype: 'splitter'
+		       			 },
+		       			 {
+				            xtype: 'textfield',
+				            flex: 1
+		        		}
+		       			 ] */
+		    ,
+		    renderTo: Ext.getBody()
+		});
+
+	});
+</script>
+</head>
+<body>
+</body>
+
+</html>

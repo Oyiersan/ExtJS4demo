@@ -1,0 +1,70 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+	Ext.onReady(function(){
+		//提示信息   arg(标题，信息，回调函数,作用域)
+//		Ext.MessageBox.alert('我是标题!' , 'Hello World!' , function(){
+//			console.info(this);
+//			alert('我是回调函数!');
+//		} , this);
+//		Ext.Msg.alert('提示信息','ExtJS!!!');
+//		alert('执行');
+
+		//询问框 op回调函数传入参数函数 yes no
+/* 		Ext.Msg.confirm('提示信息','确认删除该条记录么?',fun);
+		var fun = function(op) {
+				// yes  on
+				console.log(op);
+				if(op == 'no'){
+					alert('取消了!');
+				} else {
+					alert('确认了!');
+				}
+			}; */
+
+			//输入框
+			//String title, String msg, [Function fn], [Object scope], [Boolean/Number multiline], [String value]
+/* 			Ext.Msg.prompt('我是标题!','请输入姓名:' , function(op , val){
+				//op  ok cancel
+				console.info(op);
+				console.info(val);
+			} , this , true , '张三'); */
+
+			//等待框
+/* 			Ext.Msg.wait('提示信息','我是内容' ,{
+				   interval: 400, 			//循环定时的间隔
+				   duration: 2000,			//总时长
+				   increment: 5,			//执行进度条的次数
+				   text: '更新中,请稍后...',	//进度条上的文字
+				   scope: this,
+				   fn: function(){
+						alert('更新成功!');
+				   },
+				   animate:true				//更新渲染时提供一个动画效果
+			}); */
+
+			//show方法
+			Ext.Msg.show({
+				title:'我是自定义的提示框!!' ,
+				msg:'我是内容!!' ,
+				width:300 ,
+				height:300 ,
+				buttons:Ext.Msg.YESNOCANCEL ,
+				icon:Ext.Msg.QUESTION		// ERROR INFO QUESTION  WARNING
+			});
+
+
+
+
+	});
+</script>
+</head>
+<body>
+</body>
+
+</html>

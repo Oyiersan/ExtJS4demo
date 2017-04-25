@@ -1,0 +1,91 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+
+var urlRoot = 'http://extjsinaction.com/crud.php?model=Employee&method=';
+var employeeStore = Ext.create('Ext.data.Store', {
+    model : 'Employee',
+    proxy : {
+        type   : 'jsonp',
+        api    : {
+            create  : urlRoot + 'CREATE',
+            read    : urlRoot + 'READ',
+            update  : urlRoot + 'UPDATE',
+            destroy : urlRoot + 'DESTROY'
+        },
+        reader : {
+            type            : 'json',
+            root            : 'data',
+            idProperty      : 'id',
+            successProperty : 'meta.success'
+        },
+        writer : {
+            type           : 'json',
+            encode         : true,
+            writeAllFields : true,
+            root           : 'data',
+            allowSingle    : true,
+            batch          : false,
+            writeRecords   : function(request, data) {
+                request.jsonData = data;
+                return request;
+            }
+        }
+    }
+});
+employeeStore.load();
+
+Ext.define('Employee', {
+    extend: 'Ext.data.Model',
+    idProperty: 'id',
+    fields: [
+        {name: 'id',type: 'int'},
+        {name: 'departmentId', type: 'int' },
+        {name:'dateHired', type:'date', format:'Y-m-d'},
+        {name:'dateFired', type:'date', format:'Y-m-d'},
+        {name:'dob', type:'date', format: 'Y-m-d'},
+        'firstName',
+        'lastName',
+        'middle',
+        'title',
+        'street',
+        'city',
+        'state',
+        'zip',
+        'departmentName',
+        'rate',
+        'officePhone',
+        'homePhone',
+        'mobilePhone',
+        'email'
+    ],
+    validations: [
+       {type: 'presence', field: 'firstName'},
+       {type: 'presence', field: 'lastName'},
+       {type: 'presence', field: 'departmentId'},
+       {type: 'format', field: 'email',  matcher: /@/}
+    ],
+    associations: [{
+        type: 'belongsTo',
+        model:'Department',
+        associationKey: 'departmentId'
+    }]
+});
+var sofie = Ext.create('Employee',{
+	firstName	:	'Sofie',
+	lastName	:	'Andresen',
+	dob			:	Ext.util.Format.date('2007/12/12','Y-m-d'),
+	email		:	'Sofie a'
+});
+var errors	=	sofie.validate();
+</script>
+</head>
+<body>
+</body>
+
+</html>

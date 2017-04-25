@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+	Ext.onReady(function(){
+		// This 关键字 在javascript里的使用
+		//this关键字总是指向调用者，谁调用函数，this就指向谁
+		//var x = 5; // window.x = 5 ;
+		//function test(){
+			//alert(this.x);
+		//};
+		//test.x = 10;
+		//alert(test.x);
+		//window.test();
+		//test();
+
+		// call apply 主要作用是绑定作用域
+		//var color = 'red';
+		//var obj = {color:'yellow'};
+		//
+		//function showColor(x,y,z){
+		//	alert(x+y+z);
+		//	alert(this.color);
+		//};
+		//// call、apply 绑定一个函数 ，到你指定的作用域内执行
+		////showColor.call(obj,10,20,30);	//obj为绑定的作用域
+		////showColor.apply(obj,[2,3,4]);
+
+		//块的概念:变量的回收以函数执行是否完成为准，执行完及回收
+		//function test(){
+		//	(function(){
+		//		for(var i = 1 ;i <=5 ; i++){
+		//			alert(i);
+		//		}
+		//	})();
+		//	alert(i);
+		//};
+		//test();
+
+		// 闭包 ：执行环境、作用域链、js垃圾回收
+		// 函数碰到return直接返回、没有renturn 返回结果undefined
+		// 在javascript语言里: 更不提倡使用全局变量 (1：不安全、2：做变量搜索查找的时候效率比较低)
+		//function test(){
+		//	return function(){
+		//		alert('我是闭包体代码...');
+		//	};
+		//};
+		//var f = test();
+		////alert(typeof f);
+		//f();
+
+		//function test(){
+		//	var temp = 10 ;
+		//	return function(){
+		//		alert(temp);
+		//	};
+		//};
+		//test()();
+
+		//var i = 0 ;
+		//
+		//function test(){
+		//	alert(++i);
+		//};
+
+		// 避免使用全局变量 点击按钮 统计点击的次数
+		//var inp = (function(){
+		//	var i = 0;
+		//	return {
+		//		getCount:function(){	//单体
+		//			alert(++i);
+		//		}
+		//	};
+		//})();
+
+		//inp.getCount();
+
+	});
+
+</script>
+</head>
+<body>
+</body>
+
+</html>

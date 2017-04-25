@@ -1,0 +1,98 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript" src="datastores.js"></script>
+<script type="text/javascript">
+//缓冲分页
+var grid;
+Ext.onReady(function() {
+    var url = 'http://extjsinaction.com/crud.php?model=Employee&method=READ';
+    var bufferedEmployeeStore = Ext.create('Ext.data.Store', {
+        model      : 'Employee',
+        pageSize   : 10,	//页面大小
+        buffered   : true,
+
+        autoLoad : true,
+        trailingBufferZone : 5,	//设置滚动条
+        leadingBufferZone  : 5,	//查询之间被查询被检索出来行数
+
+        remoteSort : true,
+        sorters    : {
+            property  : 'lastName',
+            direction : 'ASC'
+        },
+        proxy      : {
+            type   : 'jsonp',
+            url    : url,
+            reader : {
+                type            : 'json',
+                root            : 'data',
+                idProperty      : 'id',
+                successProperty : 'meta.success',
+                totalProperty   : 'meta.total'	//从服务端读取查询结果的总数量
+            }
+        }
+    });
+
+
+    var columns = [
+        {
+            xtype     : 'templatecolumn',
+            header    : 'ID',
+            dataIndex : 'id',
+            sortable  : true,
+            width     : 50,
+            resizable : false,
+            hidden    : true,
+            tpl       : '<span style="color: #0000FF;">{id}</span>'
+        },
+        {
+            header    : 'Last Name',
+            dataIndex : 'lastName',
+            sortable  : true,
+            hideable  : false,
+            width     : 75
+        },
+        {
+            header    : 'First Name',
+            dataIndex : 'firstName',
+            sortable  : true,
+            hideable  : false,
+            width     : 75
+        },
+        {
+            header    : 'Address',
+            dataIndex : 'street',
+            sortable  : false,
+            flex      : 1,
+            tpl       : '{street}<br />{city} {state}, {zip}'
+        }
+    ];
+
+    var grid = Ext.create('Ext.grid.Panel', {
+        xtype            : 'grid',
+        columns          : columns,
+        store            : bufferedEmployeeStore,
+        loadMask         : true,
+
+    });
+
+    Ext.create('Ext.window.Window', {
+        height : 350,
+        width  : 550,
+        border : false,
+        items  : grid,
+        center : true,
+        layout : 'fit'
+    }).show();
+});
+</script>
+</head>
+<body>
+</body>
+
+</html>

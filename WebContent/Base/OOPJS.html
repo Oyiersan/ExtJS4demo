@@ -1,0 +1,95 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+	Ext.onReady(function(){
+		//var obj = new Object();
+		var obj = {name:'z3' , age:20};	//json对象
+//		obj.sex = '男';		//新增属性
+//		obj.age = 25 ;		//修改属性的值
+//		delete obj.name ;	//delete删除对象的属性或方法，
+
+		//枚举对象内置属性的循环
+//		for( var attr in obj){
+//			alert(attr + " : " + obj[attr]);
+//		}
+
+		//定义了一个js的类
+		var Person = function(name , age){	//构造函数
+			this.name = name ;
+			this.age  = age ;
+			// private
+			var _sex = '男';	//js的私有属性
+			this.getSex = function(){
+				return _sex ;
+			};
+			this.setSex = function(sex){
+				_sex = sex ;
+			};
+		};
+
+//		Person.prototype.id = 10 ;
+//		Person.prototype.method = function(){
+//			alert(this.age);
+//		};
+
+		//原型对象的构造器 总是指向当前对象的模板
+		Person.prototype = {
+			constructor:Person ,
+			id:10 ,
+			method : function(){
+				alert('method....');
+			}
+		};
+
+		//实例化一个对象
+//		var p = new Person('张三',30);
+//		alert(p.name);
+//		alert(p.id);
+//		p.method();
+
+
+		//单体模式: 简单单体
+//		var SXT = {};
+//		SXT.Array = {
+//			each:function(){
+//				alert('each....');
+//			},
+//			filter:function(){
+//				alert('filter...');
+//			}
+//		};
+//		SXT.staticMethod = function(){
+//			alert('我是单体下的静态方法！');
+//		};
+
+		//SXT.Array.each();
+		//SXT.staticMethod();
+
+		//单体模式: 闭包单体
+//		var SXT = (function(){
+//			var Array = {
+//				each:function(){
+//					alert('each...');
+//				}
+//			};
+//			return {
+//				arrayEach:function(){
+//					Array.each();
+//				}
+//			};
+//		})();
+//		SXT.arrayEach();
+
+	});
+
+</script>
+</head>
+<body>
+</body>
+
+</html>

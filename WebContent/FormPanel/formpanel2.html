@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hello demo</title>
+<link rel="stylesheet" type="text/css"
+	href="../ExtJS4.0/resources/css/ext-all.css" />
+<script type="text/javascript" src="../ExtJS4.0/ext-all-debug.js"></script>
+<script type="text/javascript">
+var fpItems = [
+               {
+            	   fieldLabel	:	'Password',
+            	   allowBlank	:	false,
+            	   inputType	:	'password',
+               },
+               {
+            	   fieldLabel	:	'File',
+            	   allowBlank	:	false,
+            	   xtype	:	'filefield'
+               }
+               ];
+	Ext.onReady(function(){
+		var fp = Ext.create('Ext.form.Panel',{
+			renderTo : Ext.getBody(),
+			width	: 400,
+			height	:	240,
+			title	:	'Exercising textfilds',
+			frame	:	true,
+			bodyStyle	:	'padding : 6px',
+			labelWidth	:	126,
+			defaultType	:	'textfield',
+			defaults	:	{
+				mgTarget	:	'side',
+				anchor		:	'-20'
+					},
+			items	: fpItems
+		});
+
+	});
+</script>
+</head>
+<body>
+</body>
+
+</html>
